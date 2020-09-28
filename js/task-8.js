@@ -8,6 +8,7 @@ const refs = {
   closeModalBtn: document.querySelector('button[data-action="close-lightbox"]'),
   lightboxContent: document.querySelector(".lightbox__content"),
   gallerySrc: galleryItems.map((item) => item.original),
+  lightboxoverlay: document.querySelector(".lightbox__overlay"),
 };
 
 //Создание и рендер разметки по массиву данных и предоставленному шаблону.
@@ -63,6 +64,7 @@ function handleImgClick(evt) {
 refs.closeModalBtn.addEventListener("click", closeModal);
 refs.lightboxContent.addEventListener("click", handleOverlayClick);
 window.addEventListener("keydown", nextImage);
+refs.lightboxoverlay.addEventListener("click", handleOverlayClick);
 
 function closeModal() {
   refs.lightbox.classList.remove("is-open");
@@ -97,7 +99,7 @@ function nextImage(key) {
     }
   }
   if (key.code === "ArrowLeft") {
-    for (let i = 1; i < gallerySrc.length; i += 1) {
+    for (let i = 1; i < refs.gallerySrc.length; i += 1) {
       if (refs.gallerySrc[i] === refs.lightboxImg.src) {
         refs.lightboxImg.src = refs.gallerySrc[i - 1];
         break;
